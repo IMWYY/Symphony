@@ -14,7 +14,7 @@ import java.util.Date;
  * create by stephen on 2018/5/17
  */
 @WebServlet("/")
-public class StudentShowServlet extends HttpServlet {
+public class HelloServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

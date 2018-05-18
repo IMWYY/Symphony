@@ -3,3 +3,5 @@ out
 .idea
 Symphony.iml
 /symphony-demo/target
+/symphony-demo/symphony-demo.iml
+/symphony-core/symphony-core.iml
