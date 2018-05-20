@@ -1,4 +1,4 @@
-package xyz.imwyy.utils;
+package xyz.imwyy.symphony.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

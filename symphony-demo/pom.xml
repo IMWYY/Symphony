@@ -13,6 +13,14 @@
 
 
     <dependencies>
+        <dependency>
+            <groupId>xyz.imwyy</groupId>
+            <artifactId>symphony-core</artifactId>
+            <version>1.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+
         <!-- Servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
