@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 类操作的助手类
+ * 类操作的助手类 获取被指定注解的类的结合
  * create by stephen on 2018/5/19
  */
 public class ClassHelper {
@@ -20,10 +20,9 @@ public class ClassHelper {
         CLASS_SET = ClassUtil.getClassSet(basePackage);
     }
 
-    public static Set<Class<?>> getClassSet() {
-        return CLASS_SET;
-    }
-
+    /**
+     * 获取所有service类集合
+     */
     public static Set<Class<?>> getServiceClassSet() {
         Set<Class<?>> result = new HashSet<>();
         for (Class<?> clazz : CLASS_SET) {
@@ -34,6 +33,9 @@ public class ClassHelper {
         return result;
     }
 
+    /**
+     * 获取所有controller类集合
+     */
     public static Set<Class<?>> getControllerClassSet() {
         Set<Class<?>> result = new HashSet<>();
         for (Class<?> clazz : CLASS_SET) {
@@ -44,6 +46,9 @@ public class ClassHelper {
         return result;
     }
 
+    /**
+     * 获取所有controller和service类集合
+     */
     public static Set<Class<?>> getBeanClassSet() {
         Set<Class<?>> result = new HashSet<>();
         for (Class<?> clazz : CLASS_SET) {

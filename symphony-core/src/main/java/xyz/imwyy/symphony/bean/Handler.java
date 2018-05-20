@@ -3,6 +3,7 @@ package xyz.imwyy.symphony.bean;
 import java.lang.reflect.Method;
 
 /**
+ * 请求的处理类，保存请求的controller类和请求调用的具体方法
  * create by stephen on 2018/5/19
  */
 public class Handler {

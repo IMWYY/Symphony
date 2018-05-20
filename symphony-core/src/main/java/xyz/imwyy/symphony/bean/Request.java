@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
+ * 请求信息的封装类 请求方法和请求路径
  * create by stephen on 2018/5/19
  */
 public class Request {

@@ -1,7 +1,7 @@
 package xyz.imwyy.symphony;
 
 /**
- * 属性常量
+ * 属性名常量
  * create by stephen on 2018/5/18
  */
 public interface ConfigConstant {

@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
+ * 加载属性文件，获取属性值的工具类
  * create by stephen on 2018/5/18
  */
 @SuppressWarnings("all")
@@ -16,6 +17,9 @@ public class PropsUtil {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PropsUtil.class);
 
+    /**
+     * 加载属性文件到Properties
+     */
     public static Properties loadProps(String file) {
         Properties props = null;
         InputStream inputStream = null;

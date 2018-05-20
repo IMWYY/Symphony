@@ -36,14 +36,14 @@ public class ConfigHelper {
     }
 
     /**
-     * 获取应用JSP路径
+     * 获取应用JSP路径 有默认值（配置可选）
      */
     public static String getAppJspPath() {
         return PropsUtil.getString(CONFIG_PROPS, ConfigConstant.APP_JSP_PATH, "/");
     }
 
     /**
-     * 获取应用静态资源路径
+     * 获取应用静态资源路径 有默认值（配置可选）
      */
     public static String getAppAssetPath() {
         return PropsUtil.getString(CONFIG_PROPS, ConfigConstant.APP_ASSET_PATH, "/asset/");

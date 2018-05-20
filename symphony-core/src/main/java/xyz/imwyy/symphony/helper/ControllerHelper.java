@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * 控制器类的助手类 处理所有被注解的路由
  * create by stephen on 2018/5/19
  */
 public class ControllerHelper {
@@ -27,6 +28,7 @@ public class ControllerHelper {
                     for (Method method : methods) {
                         if (method.isAnnotationPresent(Route.class)) {
                             Route route = method.getAnnotation(Route.class);
+
                             // 获取url 格式为"请求方法:路径"
                             String url = route.value();
                             if (url.matches("\\w+:/\\w*")) {
@@ -43,5 +45,10 @@ public class ControllerHelper {
                 }
             }
         }
+    }
+
+    public static Handler getHandler(String reqMethod, String reqPath) {
+        Request request = new Request(reqMethod, reqPath);
+        return ROUTE_MAP.get(request);
     }
 }

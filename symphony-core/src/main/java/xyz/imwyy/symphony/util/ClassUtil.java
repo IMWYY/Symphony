@@ -41,7 +41,6 @@ public class ClassUtil {
             clazz = Class.forName(className, isInitialized, getClassLoader());
         } catch (ClassNotFoundException e) {
             LOGGER.error("load class failure", e);
-            e.printStackTrace();
             throw new RuntimeException(e);
         }
         return clazz;

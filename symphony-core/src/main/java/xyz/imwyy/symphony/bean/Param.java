@@ -3,6 +3,7 @@ package xyz.imwyy.symphony.bean;
 import java.util.Map;
 
 /**
+ * 参数键值对的实体类
  * create by stephen on 2018/5/19
  */
 public class Param {
