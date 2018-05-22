@@ -10,6 +10,7 @@ import java.util.Properties;
  * create by stephen on 2018/5/18
  */
 public class ConfigHelper {
+
     private static final Properties CONFIG_PROPS = PropsUtil.loadProps(ConfigConstant.CONFIG_FILE);
 
     public static String getJdbcDriver() {

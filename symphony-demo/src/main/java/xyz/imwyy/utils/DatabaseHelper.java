@@ -29,9 +29,6 @@ public class DatabaseHelper {
         DATA_SOURCE.setUrl(URL);
         DATA_SOURCE.setUsername(USERNAME);
         DATA_SOURCE.setPassword(PASSWORD);
-
-System.out.println("password: " + PASSWORD);
-
     }
 
     /**
