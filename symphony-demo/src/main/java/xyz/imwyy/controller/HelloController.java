@@ -17,6 +17,7 @@ public class HelloController {
 
     @Route("get:/hello")
     public View hello(Param param) {
+System.out.println("hello ");
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String currentTime = dateFormat.format(new Date());
         View view = new View("/hello.jsp");

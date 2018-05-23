@@ -1,7 +1,5 @@
 package xyz.imwyy.symphony;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import xyz.imwyy.symphony.bean.Data;
 import xyz.imwyy.symphony.bean.Handler;
 import xyz.imwyy.symphony.bean.Param;
@@ -9,7 +7,10 @@ import xyz.imwyy.symphony.bean.View;
 import xyz.imwyy.symphony.helper.BeanHelper;
 import xyz.imwyy.symphony.helper.ConfigHelper;
 import xyz.imwyy.symphony.helper.ControllerHelper;
-import xyz.imwyy.symphony.util.*;
+import xyz.imwyy.symphony.util.EncodeUtil;
+import xyz.imwyy.symphony.util.JsonUtil;
+import xyz.imwyy.symphony.util.ReflectionUtil;
+import xyz.imwyy.symphony.util.StreamUtil;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -32,11 +33,11 @@ import java.util.Map;
 @WebServlet(urlPatterns = "/*", loadOnStartup = 0)
 public class DispatcherServlet extends HttpServlet {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DispatcherServlet.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(DispatcherServlet.class);
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-LOGGER.debug("DispatcherServlet - init");
+//LOGGER.debug("DispatcherServlet - init");
         SymphonyLoader.init();
         ServletContext servletContext = config.getServletContext();
         // 处理jsp的context

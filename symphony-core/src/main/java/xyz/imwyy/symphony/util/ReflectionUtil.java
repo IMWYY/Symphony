@@ -1,7 +1,5 @@
 package xyz.imwyy.symphony.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -12,7 +10,7 @@ import java.lang.reflect.Method;
  */
 public class ReflectionUtil {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ReflectionUtil.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(ReflectionUtil.class);
 
     /**
      * 创建类的实例对象
@@ -24,7 +22,7 @@ public class ReflectionUtil {
         try {
             instance = cls.newInstance();
         } catch (Exception e) {
-            LOGGER.error("fail to new instance", e);
+//            LOGGER.error("fail to new instance", e);
             throw new RuntimeException(e);
         }
         return instance;
@@ -42,7 +40,7 @@ public class ReflectionUtil {
         try {
             result = method.invoke(object, args);
         } catch (Exception e) {
-            LOGGER.error("fail to invoke method", e);
+//            LOGGER.error("fail to invoke method", e);
             throw new RuntimeException(e);
         }
         return result;
@@ -59,7 +57,7 @@ public class ReflectionUtil {
         try {
             field.set(object, value);
         } catch (IllegalAccessException e) {
-            LOGGER.error("set field failure", e);
+//            LOGGER.error("set field failure", e);
             throw new RuntimeException(e);
         }
     }

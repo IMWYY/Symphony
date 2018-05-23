@@ -1,7 +1,5 @@
 package xyz.imwyy.symphony.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,7 +13,7 @@ import java.util.Properties;
 @SuppressWarnings("all")
 public class PropsUtil {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PropsUtil.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(PropsUtil.class);
 
     /**
      * 加载属性文件到Properties
@@ -31,13 +29,13 @@ public class PropsUtil {
             props = new Properties();
             props.load(inputStream);
         } catch (IOException e) {
-            LOGGER.error("fail to load properties file.", e);
+//            LOGGER.error("fail to load properties file.", e);
         } finally {
             if (inputStream != null) {
                 try {
                     inputStream.close();
                 } catch (IOException e) {
-                    LOGGER.error("close input stream failure", e);
+//                    LOGGER.error("close input stream failure", e);
                 }
             }
         }

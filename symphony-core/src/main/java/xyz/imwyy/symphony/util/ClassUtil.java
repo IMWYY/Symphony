@@ -1,8 +1,6 @@
 package xyz.imwyy.symphony.util;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -21,7 +19,7 @@ import java.util.jar.JarFile;
  */
 public class ClassUtil {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ClassUtil.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(ClassUtil.class);
 
     /**
      * 获取类加载器
@@ -40,7 +38,7 @@ public class ClassUtil {
         try {
             clazz = Class.forName(className, isInitialized, getClassLoader());
         } catch (ClassNotFoundException e) {
-            LOGGER.error("load class failure", e);
+//            LOGGER.error("load class failure", e);
             throw new RuntimeException(e);
         }
         return clazz;
@@ -81,7 +79,7 @@ public class ClassUtil {
                 }
             }
         } catch (IOException e) {
-            LOGGER.error("get class set failure", e);
+//            LOGGER.error("get class set failure", e);
             e.printStackTrace();
             throw new RuntimeException(e);
         }

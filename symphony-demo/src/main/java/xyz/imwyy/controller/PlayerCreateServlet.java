@@ -11,7 +11,7 @@
 ///**
 // * create by stephen on 2018/5/18
 // */
-//@WebServlet("/ss")
+//@WebServlet("/create")
 //public class PlayerCreateServlet extends HttpServlet {
 //
 //    @Override
