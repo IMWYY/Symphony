@@ -1,5 +1,7 @@
 package xyz.imwyy.symphony;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import xyz.imwyy.symphony.bean.Data;
 import xyz.imwyy.symphony.bean.Handler;
 import xyz.imwyy.symphony.bean.Param;
@@ -30,31 +32,36 @@ import java.util.Map;
  * 分发请求的servlet类
  * create by stephen on 2018/5/20
  */
-@WebServlet(urlPatterns = "/*", loadOnStartup = 0)
+@WebServlet(urlPatterns = "/", loadOnStartup = 0)
 public class DispatcherServlet extends HttpServlet {
 
-//    private static final Logger LOGGER = LoggerFactory.getLogger(DispatcherServlet.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DispatcherServlet.class);
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-//LOGGER.debug("DispatcherServlet - init");
+System.out.println("DispatcherServlet - init");
         SymphonyLoader.init();
-        ServletContext servletContext = config.getServletContext();
-        // 处理jsp的context
-        ServletRegistration jspServlet = servletContext.getServletRegistration("jsp");
-        jspServlet.addMapping(ConfigHelper.getAppJspPath() + "*");
-        // 处理静态资源
-        ServletRegistration defaultServlet = servletContext.getServletRegistration("default");
-        defaultServlet.addMapping(ConfigHelper.getAppAssetPath() + "*");
+//        ServletContext servletContext = config.getServletContext();
+//        // 处理jsp的context
+//        ServletRegistration jspServlet = servletContext.getServletRegistration("jsp");
+//        jspServlet.addMapping(ConfigHelper.getAppJspPath() + "*");
+//        // 处理静态资源
+//        ServletRegistration defaultServlet = servletContext.getServletRegistration("default");
+//        defaultServlet.addMapping(ConfigHelper.getAppAssetPath() + "*");
     }
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String reqMethod = req.getMethod().toLowerCase();
-        String requestPath = req.getPathInfo();
+        String requestPath = req.getServletPath();
+//        String requestPath = req.getPathInfo();
         // 拿到handler
+System.out.println("DispatcherServlet - service - " + reqMethod + " - " + requestPath);
         Handler handler = ControllerHelper.getHandler(reqMethod, requestPath);
-        if (handler == null) return;
+        if (handler == null) {
+            resp.sendError(404);
+            return;
+        }
 
         // 拿到controller的实例
         Class<?> controllerClass = handler.getControllerClass();
@@ -99,8 +106,8 @@ public class DispatcherServlet extends HttpServlet {
                 Map<String, Object> model = view.getModel();
                 for (Map.Entry<String, Object> entry : model.entrySet()) {
                     req.setAttribute(entry.getKey(), entry.getValue());
-                    req.getRequestDispatcher(ConfigHelper.getAppJspPath() + path).forward(req, resp);
                 }
+                req.getRequestDispatcher(ConfigHelper.getAppJspPath() + path).forward(req, resp);
             }
         // json结果
         } else if (result instanceof Data) {

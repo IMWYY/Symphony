@@ -2,6 +2,8 @@ package xyz.imwyy.symphony.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * json转换的工具类
@@ -9,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class JsonUtil {
 
-//    private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtil.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtil.class);
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
@@ -18,7 +20,7 @@ public class JsonUtil {
         try {
             json = OBJECT_MAPPER.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
-//            LOGGER.error("fail to convert Object to json", e);
+            LOGGER.error("fail to convert Object to json", e);
             throw new RuntimeException(e);
         }
         return json;
@@ -29,7 +31,7 @@ public class JsonUtil {
         try {
             ojb = OBJECT_MAPPER.readValue(json, clazz);
         } catch (Exception e) {
-//            LOGGER.error("fail to convert json to Object", e);
+            LOGGER.error("fail to convert json to Object", e);
             throw new RuntimeException(e);
         }
         return ojb;
