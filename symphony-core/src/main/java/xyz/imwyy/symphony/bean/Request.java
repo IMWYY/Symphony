@@ -2,6 +2,7 @@ package xyz.imwyy.symphony.bean;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import xyz.imwyy.symphony.annotation.RequestType;
 
 /**
  * 请求信息的封装类 请求方法和请求路径
@@ -12,19 +13,19 @@ public class Request {
     /**
      * 请求方法 get post等
      */
-    private String requestMethod;
+    private RequestType requestType;
     /**
      * 请求路径
      */
     private String requestPath;
 
-    public Request(String requestMethod, String requestPath) {
-        this.requestMethod = requestMethod;
+    public Request(String requestMethod, RequestType requestType) {
+        this.requestType = requestType;
         this.requestPath = requestPath;
     }
 
-    public String getRequestMethod() {
-        return requestMethod;
+    public RequestType getRequestMethod() {
+        return requestType;
     }
 
     public String getRequestPath() {

@@ -1,7 +1,6 @@
 package xyz.imwyy.symphony;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import xyz.imwyy.symphony.annotation.RequestType;
 import xyz.imwyy.symphony.bean.Data;
 import xyz.imwyy.symphony.bean.Handler;
 import xyz.imwyy.symphony.bean.Param;
@@ -15,9 +14,7 @@ import xyz.imwyy.symphony.util.ReflectionUtil;
 import xyz.imwyy.symphony.util.StreamUtil;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,11 +32,10 @@ import java.util.Map;
 @WebServlet(urlPatterns = "/", loadOnStartup = 0)
 public class DispatcherServlet extends HttpServlet {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DispatcherServlet.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(DispatcherServlet.class);
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-System.out.println("DispatcherServlet - init");
         SymphonyLoader.init();
 //        ServletContext servletContext = config.getServletContext();
 //        // 处理jsp的context
@@ -52,12 +48,14 @@ System.out.println("DispatcherServlet - init");
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String reqMethod = req.getMethod().toLowerCase();
+        RequestType requestType = RequestType.valueOf(req.getMethod().toUpperCase());
         String requestPath = req.getServletPath();
-//        String requestPath = req.getPathInfo();
+
+        System.out.println("DispatcherServlet - service - " + requestType + " - " + requestPath);
+
         // 拿到handler
-System.out.println("DispatcherServlet - service - " + reqMethod + " - " + requestPath);
-        Handler handler = ControllerHelper.getHandler(reqMethod, requestPath);
+        Handler handler = ControllerHelper.getHandler(requestPath, requestType);
+
         if (handler == null) {
             resp.sendError(404);
             return;
@@ -89,40 +87,54 @@ System.out.println("DispatcherServlet - service - " + reqMethod + " - " + reques
 
         // 调用方法
         Method method = handler.getActionMethod();
-        Object result = ReflectionUtil.invokeMethod(controllerBean, method, param);
+        Object result;
+        if (param.isEmpty()) {
+            result = ReflectionUtil.invokeMethod(controllerBean, method);
+        } else {
+            result = ReflectionUtil.invokeMethod(controllerBean, method, param);
+        }
 
         // 处理返回结果
-        // 视图结果
         if (result instanceof View) {
-            View view = (View)result;
-            String path = view.getPath();
-            if (path == null || path.length() == 0) return;
-
-            // 如果是以 "/"开头则直接跳转
-            if (path.startsWith("/")) {
-                resp.sendRedirect(req.getContextPath() + path);
-            // 否则将数据转发到jsp页面
-            } else {
-                Map<String, Object> model = view.getModel();
-                for (Map.Entry<String, Object> entry : model.entrySet()) {
-                    req.setAttribute(entry.getKey(), entry.getValue());
-                }
-                req.getRequestDispatcher(ConfigHelper.getAppJspPath() + path).forward(req, resp);
-            }
-        // json结果
+            handleViewResult((View) result, req, resp);
         } else if (result instanceof Data) {
-            Data data = (Data)result;
-            Object model = data.getModel();
+            handleDataResult((Data) result, req, resp);
+        }
+    }
 
-            if (model != null) {
-                resp.setContentType("application/json");
-                resp.setCharacterEncoding("UTF-8");
-                PrintWriter writer = resp.getWriter();
-                String json = JsonUtil.toJson(model);
-                writer.write(json);
-                writer.flush();
-                writer.close();
+    /**
+     * 处理视图返回结果
+     */
+    private void handleViewResult(View view, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String path = view.getPath();
+        if (path == null || path.length() == 0) return;
+
+        // 如果是以 "/"开头则直接跳转
+        if (path.startsWith("/")) {
+            resp.sendRedirect(req.getContextPath() + path);
+            // 否则将数据转发到jsp页面
+        } else {
+            Map<String, Object> model = view.getModel();
+            for (Map.Entry<String, Object> entry : model.entrySet()) {
+                req.setAttribute(entry.getKey(), entry.getValue());
             }
+            req.getRequestDispatcher(ConfigHelper.getAppJspPath() + path).forward(req, resp);
+        }
+    }
+
+    /**
+     * 处理json返回结果
+     */
+    private void handleDataResult(Data data, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Object model = data.getModel();
+        if (model != null) {
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            PrintWriter writer = resp.getWriter();
+            String json = JsonUtil.toJson(model);
+            writer.write(json);
+            writer.flush();
+            writer.close();
         }
     }
 }

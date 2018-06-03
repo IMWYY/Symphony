@@ -31,4 +31,8 @@ public class Param {
     public Map<String, Object> getParamMap() {
         return paramMap;
     }
+
+    public boolean isEmpty() {
+        return paramMap == null || paramMap.size() == 0;
+    }
 }

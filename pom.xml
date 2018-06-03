@@ -11,6 +11,7 @@
     <modules>
         <module>symphony-demo</module>
         <module>symphony-core</module>
+        <module>symphony-security</module>
     </modules>
 
     <properties>
@@ -18,6 +19,7 @@
     </properties>
 
     <build>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

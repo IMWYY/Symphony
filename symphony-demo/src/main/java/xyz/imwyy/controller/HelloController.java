@@ -1,6 +1,7 @@
 package xyz.imwyy.controller;
 
 import xyz.imwyy.symphony.annotation.Controller;
+import xyz.imwyy.symphony.annotation.RequestType;
 import xyz.imwyy.symphony.annotation.Route;
 import xyz.imwyy.symphony.bean.Data;
 import xyz.imwyy.symphony.bean.Param;
@@ -16,17 +17,17 @@ import java.util.Date;
 @Controller
 public class HelloController {
 
-    @Route("get:/hello")
-    public View hello(Param param) {
+    @Route(value = "/hello", type = RequestType.GET)
+    public View hello() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String currentTime = dateFormat.format(new Date());
-        View view = new View("view/hello.jsp");
+        View view = new View("hello.jsp");
         view.addModel("currentTime", currentTime);
         return view;
     }
 
-    @Route("post:/test")
-    public Data test(Param param) {
+    @Route(value = "/test", type = RequestType.POST)
+    public Data test() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String currentTime = dateFormat.format(new Date());
         return new Data(currentTime);

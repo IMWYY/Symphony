@@ -1,5 +1,6 @@
 package xyz.imwyy.symphony.helper;
 
+import xyz.imwyy.symphony.annotation.RequestType;
 import xyz.imwyy.symphony.annotation.Route;
 import xyz.imwyy.symphony.bean.Handler;
 import xyz.imwyy.symphony.bean.Request;
@@ -28,17 +29,13 @@ public class ControllerHelper {
                     for (Method method : methods) {
                         if (method.isAnnotationPresent(Route.class)) {
                             Route route = method.getAnnotation(Route.class);
-
-                            // 获取url 格式为"请求方法:路径"
                             String url = route.value();
-                            if (url.matches("\\w+:/\\w*")) {
-                                String[] param = url.split(":");
-                                if (param.length == 2) {
-                                    Request request = new Request(param[0], param[1]);
-                                    Handler handler = new Handler(clazz, method);
+                            RequestType type = route.type();
+                            if (url.startsWith("/")) {
+                                Request request = new Request(url, type);
+                                Handler handler = new Handler(clazz, method);
 
-                                    ROUTE_MAP.put(request, handler);
-                                }
+                                ROUTE_MAP.put(request, handler);
                             }
                         }
                     }
@@ -47,8 +44,8 @@ public class ControllerHelper {
         }
     }
 
-    public static Handler getHandler(String reqMethod, String reqPath) {
-        Request request = new Request(reqMethod, reqPath);
+    public static Handler getHandler(String reqPath, RequestType requestType) {
+        Request request = new Request(reqPath, requestType);
         return ROUTE_MAP.get(request);
     }
 }
