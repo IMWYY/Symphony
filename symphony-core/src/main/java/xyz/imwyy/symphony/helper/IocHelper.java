@@ -16,7 +16,7 @@ public class IocHelper {
      *  遍历所有的类 找到带有inject注解的属性 并且初始化
      */
     static {
-        Map<Class<?>, Object> beanMap = BeanHelper.getBeanMap();
+        Map<Class<?>, Object> beanMap = BeanFactory.getBeanMap();
         if (beanMap != null && beanMap.size() > 0) {
             // 遍历所有的类
             for (Map.Entry<Class<?>, Object> entry : beanMap.entrySet()) {

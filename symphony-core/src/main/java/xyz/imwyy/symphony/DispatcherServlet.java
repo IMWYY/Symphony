@@ -5,7 +5,7 @@ import xyz.imwyy.symphony.bean.Data;
 import xyz.imwyy.symphony.bean.Handler;
 import xyz.imwyy.symphony.bean.Param;
 import xyz.imwyy.symphony.bean.View;
-import xyz.imwyy.symphony.helper.BeanHelper;
+import xyz.imwyy.symphony.helper.BeanFactory;
 import xyz.imwyy.symphony.helper.ConfigHelper;
 import xyz.imwyy.symphony.helper.ControllerHelper;
 import xyz.imwyy.symphony.util.EncodeUtil;
@@ -63,7 +63,7 @@ public class DispatcherServlet extends HttpServlet {
 
         // 拿到controller的实例
         Class<?> controllerClass = handler.getControllerClass();
-        Object controllerBean = BeanHelper.getBean(controllerClass);
+        Object controllerBean = BeanFactory.getBean(controllerClass);
 
         // 构造方法的参数
         Param param = new Param();

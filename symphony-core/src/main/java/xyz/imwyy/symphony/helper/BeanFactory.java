@@ -10,7 +10,7 @@ import java.util.Set;
  * bean的助手类
  * create by stephen on 2018/5/19
  */
-public class BeanHelper {
+public class BeanFactory {
 
     /**
      * class到object实例的映射 利用ReflectionUtil加载
@@ -42,5 +42,9 @@ public class BeanHelper {
             throw new RuntimeException("can not get bean by class " + cls);
         }
         return (T)BEAN_MAP.get(cls);
+    }
+
+    public static void setBean(Class<?> key, Object value) {
+        BEAN_MAP.put(key, value);
     }
 }

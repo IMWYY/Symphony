@@ -22,7 +22,6 @@ public class CglibDynamicProxy implements MethodInterceptor {
     @SuppressWarnings("unchecked")
     public <T> T getProxy(Class<T> cls) {
         return (T) Enhancer.create(cls, this);
-
     }
 
     @Override
@@ -32,7 +31,6 @@ public class CglibDynamicProxy implements MethodInterceptor {
         after();
         return result;
     }
-
 
     public void before() {
         System.out.println();

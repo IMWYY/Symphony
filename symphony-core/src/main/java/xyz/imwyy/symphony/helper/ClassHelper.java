@@ -59,5 +59,17 @@ public class ClassHelper {
         return result;
     }
 
+    /**
+     * 获取某个类的所有子类
+     */
+    public static Set<Class<?>> getClassSetBySuper(Class<?> superClass) {
+        Set<Class<?>> resultSet = new HashSet<>();
+        for (Class<?> cls : CLASS_SET) {
+            if (superClass.isAssignableFrom(cls) && !superClass.equals(cls)) {
+                resultSet.add(cls);
+            }
+        }
+        return resultSet;
+    }
 
 }

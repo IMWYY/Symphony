@@ -1,9 +1,6 @@
 package xyz.imwyy.symphony;
 
-import xyz.imwyy.symphony.helper.BeanHelper;
-import xyz.imwyy.symphony.helper.ClassHelper;
-import xyz.imwyy.symphony.helper.ControllerHelper;
-import xyz.imwyy.symphony.helper.IocHelper;
+import xyz.imwyy.symphony.helper.*;
 import xyz.imwyy.symphony.util.ClassUtil;
 
 /**
@@ -18,7 +15,8 @@ public class SymphonyLoader {
     public static void init() {
         Class<?>[] classList = {
                 ClassHelper.class,
-                BeanHelper.class,
+                BeanFactory.class,
+                AopHelper.class,
                 IocHelper.class,
                 ControllerHelper.class
         };
