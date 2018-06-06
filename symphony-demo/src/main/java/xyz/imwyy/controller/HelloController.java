@@ -1,12 +1,12 @@
 package xyz.imwyy.controller;
 
-import xyz.imwyy.symphony.annotation.Controller;
-import xyz.imwyy.symphony.annotation.RequestType;
-import xyz.imwyy.symphony.annotation.Route;
-import xyz.imwyy.symphony.bean.Data;
-import xyz.imwyy.symphony.bean.Param;
-import xyz.imwyy.symphony.bean.View;
+import xyz.imwyy.symphony.mvc.annotation.Controller;
+import xyz.imwyy.symphony.mvc.annotation.RequestType;
+import xyz.imwyy.symphony.mvc.annotation.Route;
+import xyz.imwyy.symphony.mvc.web.Data;
+import xyz.imwyy.symphony.mvc.web.View;
 
+import javax.servlet.http.HttpServletResponse;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,7 +27,7 @@ public class HelloController {
     }
 
     @Route(value = "/test", type = RequestType.POST)
-    public Data test() {
+    public Data test(HttpServletResponse response) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String currentTime = dateFormat.format(new Date());
         return new Data(currentTime);

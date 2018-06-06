@@ -2,8 +2,8 @@ package xyz.imwyy.controller;
 
 
 import org.junit.Test;
-import xyz.imwyy.symphony.annotation.RequestType;
-import xyz.imwyy.symphony.bean.Request;
+import xyz.imwyy.symphony.mvc.annotation.RequestType;
+import xyz.imwyy.symphony.mvc.web.Request;
 
 
 public class HelloControllerTest {

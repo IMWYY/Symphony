@@ -13,7 +13,7 @@
     <version>2.0.0</version>
 
     <dependencies>
-        <!-- symphony-core -->
+        <!-- symphony-factory -->
         <dependency>
             <groupId>xyz.imwyy</groupId>
             <artifactId>symphony-core</artifactId>

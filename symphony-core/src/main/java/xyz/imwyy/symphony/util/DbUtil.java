@@ -1,7 +1,5 @@
 package xyz.imwyy.symphony.util;
 
-import org.apache.commons.dbcp2.BasicDataSource;
-import xyz.imwyy.symphony.helper.ConfigHelper;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -12,28 +10,29 @@ import java.sql.SQLException;
  */
 public class DbUtil {
 
-
-    private static BasicDataSource DATA_SOURCE;
+//
+//    private static BasicDataSource DATA_SOURCE;
     private static final ThreadLocal<Connection> CONNECTION_HOLDER = new ThreadLocal<>();
-
-    static {
-        DATA_SOURCE = new BasicDataSource();
-        DATA_SOURCE.setDriverClassName(ConfigHelper.getJdbcDriver());
-        DATA_SOURCE.setUrl(ConfigHelper.getJdbcUrl());
-        DATA_SOURCE.setUsername(ConfigHelper.getJdbcUsername());
-        DATA_SOURCE.setPassword(ConfigHelper.getJdbcPassword());
-    }
+//
+//    static {
+//        DATA_SOURCE = new BasicDataSource();
+//        DATA_SOURCE.setDriverClassName(ConfigContext.getJdbcDriver());
+//        DATA_SOURCE.setUrl(ConfigContext.getJdbcUrl());
+//        DATA_SOURCE.setUsername(ConfigContext.getJdbcUsername());
+//        DATA_SOURCE.setPassword(ConfigContext.getJdbcPassword());
+//    }
 
     /**
      * 获取数据库连接
      */
     public static Connection getConnection() {
         Connection conn = null;
-        try {
-            conn = DATA_SOURCE.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        // TODO: 2018/6/6 处理数据源
+//        try {
+//            conn = DATA_SOURCE.getConnection();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
         return conn;
     }
 

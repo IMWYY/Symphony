@@ -4,7 +4,5 @@ out
 Symphony.iml
 /symphony-demo/target
 /symphony-core/target
-/symphony-aop/target
 /symphony-demo/symphony-demo.iml
 /symphony-core/symphony-core.iml
-/symphony-aop/symphony-aop.iml

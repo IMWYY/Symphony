@@ -1,7 +1,7 @@
 package xyz.imwyy.symphony.transaction;
 
-import xyz.imwyy.symphony.aop.Proxy;
-import xyz.imwyy.symphony.aop.ProxyChain;
+import xyz.imwyy.symphony.aop.proxy.Proxy;
+import xyz.imwyy.symphony.aop.proxy.ProxyChain;
 import xyz.imwyy.symphony.util.DbUtil;
 
 import java.lang.reflect.Method;
