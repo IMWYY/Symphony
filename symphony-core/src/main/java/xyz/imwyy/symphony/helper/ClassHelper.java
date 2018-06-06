@@ -4,6 +4,7 @@ import xyz.imwyy.symphony.annotation.Controller;
 import xyz.imwyy.symphony.annotation.Service;
 import xyz.imwyy.symphony.util.ClassUtil;
 
+import java.lang.annotation.Annotation;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -66,6 +67,19 @@ public class ClassHelper {
         Set<Class<?>> resultSet = new HashSet<>();
         for (Class<?> cls : CLASS_SET) {
             if (superClass.isAssignableFrom(cls) && !superClass.equals(cls)) {
+                resultSet.add(cls);
+            }
+        }
+        return resultSet;
+    }
+
+    /**
+     * 获取带有某个注解的所有类
+     */
+    public static Set<Class<?>> getClassSetByAnnotation(Class<? extends Annotation> annotataion) {
+        Set<Class<?>> resultSet = new HashSet<>();
+        for (Class<?> cls : CLASS_SET) {
+            if (cls.isAnnotationPresent(annotataion)) {
                 resultSet.add(cls);
             }
         }
