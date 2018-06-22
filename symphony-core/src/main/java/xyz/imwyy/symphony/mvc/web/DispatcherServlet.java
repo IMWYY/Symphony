@@ -3,7 +3,7 @@ package xyz.imwyy.symphony.mvc.web;
 import xyz.imwyy.symphony.SymphonyContext;
 import xyz.imwyy.symphony.mvc.annotation.RequestType;
 import xyz.imwyy.symphony.mvc.handler.Handler;
-import xyz.imwyy.symphony.ioc.factory.BeanFactory;
+import xyz.imwyy.symphony.bean.factory.BeanFFactory;
 import xyz.imwyy.symphony.ConfigContext;
 import xyz.imwyy.symphony.mvc.MvcContext;
 import xyz.imwyy.symphony.util.EncodeUtil;
@@ -62,7 +62,7 @@ public class DispatcherServlet extends HttpServlet {
         // 拿到controller的实例
         Class<?> controllerClass = handler.getControllerClass();
         Method handlerMethod = handler.getActionMethod();
-        Object controllerBean = BeanFactory.getBean(controllerClass);
+        Object controllerBean = BeanFFactory.getBean(controllerClass);
 
         Object[] paramInstance = createMethodParam(handlerMethod, req, resp);
         // 调用方法

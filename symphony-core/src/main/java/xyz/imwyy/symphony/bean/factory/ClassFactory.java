@@ -1,8 +1,9 @@
-package xyz.imwyy.symphony.ioc.factory;
+package xyz.imwyy.symphony.bean.factory;
 
 import xyz.imwyy.symphony.ConfigContext;
+import xyz.imwyy.symphony.bean.annotation.Component;
 import xyz.imwyy.symphony.mvc.annotation.Controller;
-import xyz.imwyy.symphony.ioc.annotation.Service;
+import xyz.imwyy.symphony.bean.annotation.Service;
 import xyz.imwyy.symphony.util.ClassUtil;
 
 import java.lang.annotation.Annotation;
@@ -17,18 +18,18 @@ public class ClassFactory {
 
     private static Set<Class<?>> CLASS_SET;
 
-    public static void init() {
+    static  {
         String basePackage = ConfigContext.getAppBasePackage();
         CLASS_SET = ClassUtil.getClassSet(basePackage);
     }
 
     /**
-     * 获取所有service类集合
+     * 获取所有被指定注解描述的类集合
      */
-    public static Set<Class<?>> getServiceClassSet() {
+    public static Set<Class<?>> getAnnotatedClassSet(Class<? extends Annotation> annotationClass) {
         Set<Class<?>> result = new HashSet<>();
         for (Class<?> clazz : CLASS_SET) {
-            if (clazz.isAnnotationPresent(Service.class)) {
+            if (clazz.isAnnotationPresent(annotationClass)) {
                 result.add(clazz);
             }
         }
@@ -36,25 +37,13 @@ public class ClassFactory {
     }
 
     /**
-     * 获取所有controller类集合
-     */
-    public static Set<Class<?>> getControllerClassSet() {
-        Set<Class<?>> result = new HashSet<>();
-        for (Class<?> clazz : CLASS_SET) {
-            if (clazz.isAnnotationPresent(Controller.class)) {
-                result.add(clazz);
-            }
-        }
-        return result;
-    }
-
-    /**
-     * 获取所有controller和service类集合
+     * 获取所有被注解的bean的集合，包括了controller service component
      */
     public static Set<Class<?>> getBeanClassSet() {
         Set<Class<?>> result = new HashSet<>();
         for (Class<?> clazz : CLASS_SET) {
-            if (clazz.isAnnotationPresent(Controller.class) || clazz.isAnnotationPresent(Service.class)) {
+            if (clazz.isAnnotationPresent(Controller.class) || clazz.isAnnotationPresent(Service.class)
+                    || clazz.isAnnotationPresent(Component.class)) {
                 result.add(clazz);
             }
         }
@@ -73,18 +62,4 @@ public class ClassFactory {
         }
         return resultSet;
     }
-
-    /**
-     * 获取带有某个注解的所有类
-     */
-    public static Set<Class<?>> getClassSetByAnnotation(Class<? extends Annotation> annotataion) {
-        Set<Class<?>> resultSet = new HashSet<>();
-        for (Class<?> cls : CLASS_SET) {
-            if (cls.isAnnotationPresent(annotataion)) {
-                resultSet.add(cls);
-            }
-        }
-        return resultSet;
-    }
-
 }

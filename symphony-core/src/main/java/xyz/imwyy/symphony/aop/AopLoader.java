@@ -1,11 +1,11 @@
 package xyz.imwyy.symphony.aop;
 
 import xyz.imwyy.symphony.aop.annotation.Aspect;
-import xyz.imwyy.symphony.aop.proxy.BaseProxy;
+import xyz.imwyy.symphony.aop.proxy.AbstractProxy;
 import xyz.imwyy.symphony.aop.proxy.Proxy;
 import xyz.imwyy.symphony.aop.proxy.ProxyFactory;
-import xyz.imwyy.symphony.ioc.factory.BeanFactory;
-import xyz.imwyy.symphony.ioc.factory.ClassFactory;
+import xyz.imwyy.symphony.bean.factory.BeanFFactory;
+import xyz.imwyy.symphony.bean.factory.ClassFactory;
 import xyz.imwyy.symphony.transaction.TransactionProxy;
 import xyz.imwyy.symphony.transaction.TransactionalBean;
 import xyz.imwyy.symphony.util.ReflectionUtil;
@@ -26,7 +26,7 @@ public class AopLoader {
                 List<Proxy> proxies = entry.getValue();
                 Object proxyObject = ProxyFactory.createProxy(cls, proxies);
                 // 装载进bean
-                BeanFactory.setBean(cls, proxyObject);
+                BeanFFactory.setBean(cls, proxyObject);
             }
         } catch (IllegalAccessException | InstantiationException e) {
             e.printStackTrace();
@@ -40,7 +40,7 @@ public class AopLoader {
     @SuppressWarnings("all")
     private static Map<Class<?>, List<Proxy>> createProxyObjectMap() throws IllegalAccessException, InstantiationException {
         Map<Class<?>, List<Proxy>> resultMap = new HashMap<>();
-        Set<Class<?>> proxyClassSet = ClassFactory.getClassSetBySuper(BaseProxy.class);
+        Set<Class<?>> proxyClassSet = ClassFactory.getClassSetBySuper(AbstractProxy.class);
 
         addTransactionProxy(resultMap);     // 将事务注解添加到map
 
@@ -71,7 +71,7 @@ public class AopLoader {
      */
     @SuppressWarnings("all")
     public static void addTransactionProxy(Map<Class<?>, List<Proxy>> map) {
-        Set<Class<?>> proxyClassSet = ClassFactory.getClassSetByAnnotation(TransactionalBean.class);
+        Set<Class<?>> proxyClassSet = ClassFactory.getAnnotatedClassSet(TransactionalBean.class);
         Proxy proxy = (Proxy) ReflectionUtil.newInstance(TransactionProxy.class);
 
         for (Class<?> cls : proxyClassSet) {

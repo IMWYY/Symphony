@@ -1,4 +1,4 @@
-package xyz.imwyy.symphony.ioc.factory;
+package xyz.imwyy.symphony.bean.factory;
 
 import xyz.imwyy.symphony.util.ReflectionUtil;
 
@@ -10,7 +10,7 @@ import java.util.Set;
  * bean的助手类
  * create by stephen on 2018/5/19
  */
-public class BeanFactory {
+public class BeanFFactory {
 
     /**
      * class到object实例的映射 利用ReflectionUtil加载
@@ -24,11 +24,6 @@ public class BeanFactory {
             Object object = ReflectionUtil.newInstance(clazz);
             BEAN_MAP.put(clazz, object);
         }
-    }
-
-
-    public static Map<Class<?>, Object> getBeanMap() {
-        return BEAN_MAP;
     }
 
     /**

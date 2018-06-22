@@ -3,7 +3,7 @@ package xyz.imwyy.symphony.mvc;
 import xyz.imwyy.symphony.mvc.annotation.Controller;
 import xyz.imwyy.symphony.mvc.annotation.RequestType;
 import xyz.imwyy.symphony.mvc.annotation.Route;
-import xyz.imwyy.symphony.ioc.factory.ClassFactory;
+import xyz.imwyy.symphony.bean.factory.ClassFactory;
 import xyz.imwyy.symphony.mvc.handler.Handler;
 import xyz.imwyy.symphony.mvc.web.Request;
 
@@ -21,7 +21,7 @@ public class MvcContext {
     private static Map<Request, Handler> ROUTE_MAP = new HashMap<>();
 
     public static void init() {
-        Set<Class<?>> controllerClasses = ClassFactory.getControllerClassSet();
+        Set<Class<?>> controllerClasses = ClassFactory.getAnnotatedClassSet(Controller.class);
         // 遍历所有的controller
         if (controllerClasses != null && controllerClasses.size() > 0) {
             for (Class<?> clazz : controllerClasses) {

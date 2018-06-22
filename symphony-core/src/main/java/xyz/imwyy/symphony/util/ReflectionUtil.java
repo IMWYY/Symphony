@@ -1,7 +1,6 @@
 package xyz.imwyy.symphony.util;
 
 
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -11,10 +10,9 @@ import java.lang.reflect.Method;
  */
 public class ReflectionUtil {
 
-//    private static final Logger LOGGER = LoggerFactory.getLogger(ReflectionUtil.class);
-
     /**
      * 创建类的实例对象
+     *
      * @param cls 类
      * @return 实例对象
      */
@@ -23,7 +21,6 @@ public class ReflectionUtil {
         try {
             instance = cls.newInstance();
         } catch (Exception e) {
-//            LOGGER.error("fail to new instance", e);
             throw new RuntimeException(e);
         }
         return instance;
@@ -31,9 +28,10 @@ public class ReflectionUtil {
 
     /**
      * 调用类的方法
+     *
      * @param object 实例对象
      * @param method 方法
-     * @param args 参数
+     * @param args   参数
      */
     public static Object invokeMethod(Object object, Method method, Object... args) {
         Object result;
@@ -41,7 +39,6 @@ public class ReflectionUtil {
         try {
             result = method.invoke(object, args);
         } catch (Exception e) {
-//            LOGGER.error("fail to invoke method", e);
             throw new RuntimeException(e);
         }
         return result;
@@ -49,17 +46,26 @@ public class ReflectionUtil {
 
     /**
      * 设置实例对象的属性
+     *
      * @param object 实例对象
-     * @param field 属性
-     * @param value 属性值
+     * @param field  属性
+     * @param value  属性值
      */
     public static void setField(Object object, Field field, Object value) {
         field.setAccessible(true);
         try {
             field.set(object, value);
         } catch (IllegalAccessException e) {
-//            LOGGER.error("set field failure", e);
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * 根据类全名获取bean的id 默认是类名第一个字母小写
+     */
+    public static String getClassId(Class<?> cls) {
+        String name = cls.getName();
+        int index = name.lastIndexOf('.');
+        return name.substring(index + 1, index + 2).toLowerCase() + name.substring(index + 2);
     }
 }
