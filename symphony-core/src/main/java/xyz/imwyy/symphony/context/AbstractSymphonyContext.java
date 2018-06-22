@@ -36,7 +36,7 @@ public abstract class AbstractSymphonyContext implements SymphonyContext {
      * 这样才能实现bean的aop
      */
     private void registerBeanInitProcessor() throws Exception {
-        List<Object> beans = beanFactory.getBeanByType(BeanInitProcessor.class);
+        List<Object> beans = beanFactory.getBeanBySuper(BeanInitProcessor.class);
         for (Object o : beans) {
             beanFactory.addBeanInitProcessor((BeanInitProcessor)o);
         }

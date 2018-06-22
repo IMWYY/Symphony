@@ -1,6 +1,7 @@
 package xyz.imwyy.symphony.util;
 
 import xyz.imwyy.symphony.ConfigContext;
+import xyz.imwyy.symphony.aop.annotation.Aspect;
 import xyz.imwyy.symphony.bean.annotation.Component;
 import xyz.imwyy.symphony.mvc.annotation.Controller;
 import xyz.imwyy.symphony.bean.annotation.Service;
@@ -37,13 +38,13 @@ public class ClassFactory {
     }
 
     /**
-     * 获取所有被注解的bean的集合，包括了controller service component
+     * 获取所有被注解的bean的集合，包括了controller service component aspect
      */
     public static Set<Class<?>> getBeanClassSet() {
         Set<Class<?>> result = new HashSet<>();
         for (Class<?> clazz : CLASS_SET) {
             if (clazz.isAnnotationPresent(Controller.class) || clazz.isAnnotationPresent(Service.class)
-                    || clazz.isAnnotationPresent(Component.class)) {
+                    || clazz.isAnnotationPresent(Component.class) || clazz.isAnnotationPresent(Aspect.class)) {
                 result.add(clazz);
             }
         }

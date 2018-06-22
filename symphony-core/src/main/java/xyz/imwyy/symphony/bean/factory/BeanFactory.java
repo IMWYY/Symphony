@@ -15,5 +15,5 @@ public interface BeanFactory {
 
     public void addBeanInitProcessor(BeanInitProcessor beanProcessor);
 
-    public List<Object> getBeanByType(Class cls) throws Exception;
+    public List<Object> getBeanBySuper(Class cls) throws Exception;
 }

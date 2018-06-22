@@ -1,11 +1,9 @@
 package xyz.imwyy.symphony.mvc;
 
 import xyz.imwyy.symphony.context.AnnotationDrivenSymphonyContext;
-import xyz.imwyy.symphony.context.ClassPathXmlSymphonyContext;
 import xyz.imwyy.symphony.context.SymphonyContext;
 import xyz.imwyy.symphony.mvc.annotation.RequestType;
 import xyz.imwyy.symphony.mvc.handler.Handler;
-import xyz.imwyy.symphony.bean.factory.BeanFFactory;
 import xyz.imwyy.symphony.ConfigContext;
 import xyz.imwyy.symphony.mvc.model.Data;
 import xyz.imwyy.symphony.mvc.model.Param;

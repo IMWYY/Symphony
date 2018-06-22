@@ -1,7 +1,9 @@
 package xyz.imwyy.symphony.bean.factory;
 
+import xyz.imwyy.symphony.aop.AutoProxyCreator;
 import xyz.imwyy.symphony.aop.BeanInitProcessor;
 import xyz.imwyy.symphony.bean.BeanDefinition;
+import xyz.imwyy.symphony.bean.BeanFactoryAware;
 import xyz.imwyy.symphony.bean.BeanReference;
 import xyz.imwyy.symphony.bean.PropertyValue;
 import xyz.imwyy.symphony.util.ReflectionUtil;
@@ -27,8 +29,9 @@ public class AutoInjectedBeanFactory implements BeanFactory {
      */
     public AutoInjectedBeanFactory() {
         BeanDefinition definition = new BeanDefinition();
-        definition.setBeanClass(BeanDefinition.class);
-        definition.setBeanClassName(BeanDefinition.class.getName());
+        definition.setBeanClass(AutoProxyCreator.class);
+        definition.setBeanClassName(AutoProxyCreator.class.getName());
+        definition.setBean(new AutoProxyCreator());
         this.beanRegistry.put("autoProxyCreator", definition);
     }
 
@@ -65,7 +68,7 @@ public class AutoInjectedBeanFactory implements BeanFactory {
     }
 
     @Override
-    public List<Object> getBeanByType(Class cls) throws Exception {
+    public List<Object> getBeanBySuper(Class cls) throws Exception {
         List<Object> result = new ArrayList<>();
         for (Map.Entry<String, BeanDefinition> entry: beanRegistry.entrySet()) {
             BeanDefinition beanDefinition = entry.getValue();
@@ -104,6 +107,12 @@ public class AutoInjectedBeanFactory implements BeanFactory {
      * 注入bean实例的属性
      */
     private void injectBeanFields(Object object, BeanDefinition beanDefinition) throws Exception {
+
+        // 将beanfactory的引用交给BeanFactoryAware
+        if (object instanceof BeanFactoryAware) {
+            ((BeanFactoryAware) object).setBeanFactory(this);
+        }
+
 
         for (PropertyValue propertyValue : beanDefinition.getPropertyValues()) {
             Object value = propertyValue.getValue();

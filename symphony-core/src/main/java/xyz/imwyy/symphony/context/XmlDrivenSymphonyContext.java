@@ -8,11 +8,11 @@ import xyz.imwyy.symphony.bean.reader.XmlDrivenBeanReader;
 /**
  * create by stephen on 2018/6/22
  */
-public class ClassPathXmlSymphonyContext extends AbstractSymphonyContext {
+public class XmlDrivenSymphonyContext extends AbstractSymphonyContext {
 
     private String configLocation;
 
-    public ClassPathXmlSymphonyContext(String configLocation) throws Exception {
+    public XmlDrivenSymphonyContext(String configLocation) throws Exception {
         super(new AutoInjectedBeanFactory());
         this.configLocation = configLocation;
         refresh();

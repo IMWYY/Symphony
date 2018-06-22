@@ -18,11 +18,7 @@ public class ProxyFactory {
 
     @SuppressWarnings("unchecked")
     public static  <T> T createProxy(Class<T> cls, List<Proxy> proxyList) {
-        return (T) Enhancer.create(cls, new MethodInterceptor() {
-            @Override
-            public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy) throws Throwable {
-                return new ProxyChain(cls, obj, method, args, proxy, proxyList);
-            }
-        });
+        return (T) Enhancer.create(cls, (MethodInterceptor) (obj, method, args, proxy)
+                -> new ProxyChain(cls, obj, method, args, proxy, proxyList));
     }
 }

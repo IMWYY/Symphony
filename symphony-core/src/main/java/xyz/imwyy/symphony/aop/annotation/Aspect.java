@@ -13,5 +13,15 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Aspect {
 
-    Class<?> value();
+    /**
+     * 代理的目标类
+     */
+    Class<?> targetClass();
+
+    /**
+     * 代理的目标包 包内的所有类都被代理
+     */
+    String targetPackage() default "";
+
+
 }
