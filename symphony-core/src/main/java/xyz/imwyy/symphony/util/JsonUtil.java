@@ -9,8 +9,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class JsonUtil {
 
-//    private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtil.class);
-
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     public static <T> String toJson(T obj) {
@@ -18,7 +16,6 @@ public class JsonUtil {
         try {
             json = OBJECT_MAPPER.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
-//            LOGGER.error("fail to convert Object to json", e);
             throw new RuntimeException(e);
         }
         return json;
@@ -29,7 +26,6 @@ public class JsonUtil {
         try {
             ojb = OBJECT_MAPPER.readValue(json, clazz);
         } catch (Exception e) {
-//            LOGGER.error("fail to convert json to Object", e);
             throw new RuntimeException(e);
         }
         return ojb;

@@ -5,7 +5,7 @@ import xyz.imwyy.symphony.aop.proxy.AbstractProxy;
 import xyz.imwyy.symphony.aop.proxy.Proxy;
 import xyz.imwyy.symphony.aop.proxy.ProxyFactory;
 import xyz.imwyy.symphony.bean.factory.BeanFFactory;
-import xyz.imwyy.symphony.bean.factory.ClassFactory;
+import xyz.imwyy.symphony.util.ClassFactory;
 import xyz.imwyy.symphony.transaction.TransactionProxy;
 import xyz.imwyy.symphony.transaction.TransactionalBean;
 import xyz.imwyy.symphony.util.ReflectionUtil;

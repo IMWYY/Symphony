@@ -1,4 +1,4 @@
-package xyz.imwyy.symphony.mvc.web;
+package xyz.imwyy.symphony.mvc.model;
 
 /**
  * 返回的数据对象

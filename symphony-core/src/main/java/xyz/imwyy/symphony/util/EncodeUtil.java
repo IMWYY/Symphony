@@ -12,14 +12,11 @@ import java.net.URLEncoder;
  */
 public class EncodeUtil {
 
-//    private static final Logger LOGGER = LoggerFactory.getLogger(EncodeUtil.class);
-
     public static String encodeURL(String url) {
         String result;
         try {
             result = URLEncoder.encode(url, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-//            LOGGER.error("fail to encode url.", e);
             throw new RuntimeException(e);
         }
         return result;
@@ -30,7 +27,6 @@ public class EncodeUtil {
         try {
             result = URLDecoder.decode(url, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-//            LOGGER.error("fail to decode url.", e);
             throw new RuntimeException(e);
         }
         return result;

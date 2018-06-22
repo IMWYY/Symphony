@@ -3,8 +3,8 @@ package xyz.imwyy.controller;
 import xyz.imwyy.symphony.mvc.annotation.Controller;
 import xyz.imwyy.symphony.mvc.annotation.RequestType;
 import xyz.imwyy.symphony.mvc.annotation.Route;
-import xyz.imwyy.symphony.mvc.web.Data;
-import xyz.imwyy.symphony.mvc.web.View;
+import xyz.imwyy.symphony.mvc.model.Data;
+import xyz.imwyy.symphony.mvc.model.View;
 
 import javax.servlet.http.HttpServletResponse;
 import java.text.DateFormat;

@@ -1,4 +1,4 @@
-package xyz.imwyy.symphony.mvc.web;
+package xyz.imwyy.symphony.mvc.model;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;

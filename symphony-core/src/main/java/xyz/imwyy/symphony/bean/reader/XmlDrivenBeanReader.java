@@ -34,7 +34,7 @@ public class XmlDrivenBeanReader extends AbstractBeanDefinitionReader {
     public void loadBeanDefinitions() throws Exception {
         URL url = this.getClass().getClassLoader().getResource(location);
         if (url == null) {
-            throw new FileNotFoundException("config file " + location + " not exist");
+            return;
         }
         URLConnection urlConnection = url.openConnection();
         urlConnection.connect();

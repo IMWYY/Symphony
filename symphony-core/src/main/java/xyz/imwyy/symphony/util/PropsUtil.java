@@ -1,7 +1,6 @@
 package xyz.imwyy.symphony.util;
 
 
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,10 +10,7 @@ import java.util.Properties;
  * 加载属性文件，获取属性值的工具类
  * create by stephen on 2018/5/18
  */
-@SuppressWarnings("all")
 public class PropsUtil {
-
-//    private static final Logger LOGGER = LoggerFactory.getLogger(PropsUtil.class);
 
     /**
      * 加载属性文件到Properties
@@ -30,13 +26,11 @@ public class PropsUtil {
             props = new Properties();
             props.load(inputStream);
         } catch (IOException e) {
-//            LOGGER.error("fail to load properties file.", e);
         } finally {
             if (inputStream != null) {
                 try {
                     inputStream.close();
                 } catch (IOException e) {
-//                    LOGGER.error("close input stream failure", e);
                     e.printStackTrace();
                 }
             }

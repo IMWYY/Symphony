@@ -3,9 +3,9 @@ package xyz.imwyy.symphony.mvc;
 import xyz.imwyy.symphony.mvc.annotation.Controller;
 import xyz.imwyy.symphony.mvc.annotation.RequestType;
 import xyz.imwyy.symphony.mvc.annotation.Route;
-import xyz.imwyy.symphony.bean.factory.ClassFactory;
 import xyz.imwyy.symphony.mvc.handler.Handler;
-import xyz.imwyy.symphony.mvc.web.Request;
+import xyz.imwyy.symphony.mvc.model.Request;
+import xyz.imwyy.symphony.util.ClassFactory;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -16,11 +16,15 @@ import java.util.Set;
  * 控制器类的助手类 处理所有被注解的路由
  * create by stephen on 2018/5/19
  */
-public class MvcContext {
+public class MvcContext implements MvcFactory {
 
-    private static Map<Request, Handler> ROUTE_MAP = new HashMap<>();
+    private Map<Request, Handler> ROUTE_MAP = new HashMap<>();
 
-    public static void init() {
+    public MvcContext() {
+        init();
+    }
+
+    private void init() {
         Set<Class<?>> controllerClasses = ClassFactory.getAnnotatedClassSet(Controller.class);
         // 遍历所有的controller
         if (controllerClasses != null && controllerClasses.size() > 0) {
@@ -45,7 +49,7 @@ public class MvcContext {
                             if (!url.startsWith("/")) {
                                 url = "/" + url;
                             }
-                            url = baseUrl +url; //加上controller的url
+                            url = baseUrl + url; //加上controller的url
 
                             Request request = new Request(url, type);
                             Handler handler = new Handler(clazz, method);
@@ -57,7 +61,8 @@ public class MvcContext {
         }
     }
 
-    public static Handler getHandler(String reqPath, RequestType requestType) {
+    @Override
+    public Handler getHandler(String reqPath, RequestType requestType) {
         Request request = new Request(reqPath, requestType);
         return ROUTE_MAP.get(request);
     }

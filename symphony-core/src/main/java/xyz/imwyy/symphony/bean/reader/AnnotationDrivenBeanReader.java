@@ -5,13 +5,14 @@ import xyz.imwyy.symphony.bean.BeanReference;
 import xyz.imwyy.symphony.bean.PropertyValue;
 import xyz.imwyy.symphony.bean.annotation.Inject;
 import xyz.imwyy.symphony.bean.factory.BeanFactory;
-import xyz.imwyy.symphony.bean.factory.ClassFactory;
+import xyz.imwyy.symphony.util.ClassFactory;
 import xyz.imwyy.symphony.util.ReflectionUtil;
 
 import java.lang.reflect.Field;
 import java.util.Set;
 
 /**
+ * 从注解中加载bean
  * create by stephen on 2018/6/22
  */
 public class AnnotationDrivenBeanReader extends AbstractBeanDefinitionReader{
@@ -27,9 +28,7 @@ public class AnnotationDrivenBeanReader extends AbstractBeanDefinitionReader{
             BeanDefinition definition = new BeanDefinition();
             definition.setBeanClass(clazz);
             definition.setBeanClassName(clazz.getName());
-
             processBeanProperty(definition);
-
             getBeanFactory().putBean(ReflectionUtil.getClassId(clazz), definition);
         }
     }

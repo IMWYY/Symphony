@@ -1,4 +1,4 @@
-package xyz.imwyy.symphony.bean.factory;
+package xyz.imwyy.symphony.util;
 
 import xyz.imwyy.symphony.ConfigContext;
 import xyz.imwyy.symphony.bean.annotation.Component;

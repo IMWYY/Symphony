@@ -6,5 +6,5 @@ package xyz.imwyy.symphony.aop.proxy;
  */
 public interface Proxy {
 
-    Object doProxy(ProxyChain proxyChain);
+    Object doProxy(ProxyChain proxyChain) throws Throwable;
 }

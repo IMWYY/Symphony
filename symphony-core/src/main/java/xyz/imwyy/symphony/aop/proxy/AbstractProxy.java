@@ -9,44 +9,53 @@ import java.lang.reflect.Method;
 public abstract class AbstractProxy implements Proxy {
 
     @Override
-    public Object doProxy(ProxyChain proxyChain) {
+    public Object doProxy(ProxyChain proxyChain) throws Throwable {
         Object result;
         Class<?> cls = proxyChain.getTargetClass();
         Method method = proxyChain.getMethod();
         Object[] param = proxyChain.getArgs();
 
-        begin(cls, method, param);
-        try {
+        if (intercept(cls, method, param)) {
+            begin(cls, method, param);
+            try {
+                result = proxyChain.doProxyChain();
+                after(cls, method, param, result);
+            } catch (Throwable throwable) {
+                error(cls, method, param, throwable);
+                throw throwable;
+            } finally {
+                end();
+            }
+        } else {
             result = proxyChain.doProxyChain();
-            after(cls, method, param, result);
-        } catch (Throwable throwable) {
-            error(cls, method, param, throwable);
-            throwable.printStackTrace();
-        } finally {
-            end();
         }
 
-        return null;
+        return result;
     }
+
+    /**
+     * 判断是否需要拦截方法
+     */
+    protected abstract boolean intercept(Class<?> cls, Method method, Object[] param);
 
     /**
      * 前置增强
      */
-    public abstract void begin(Class<?> cls, Method method, Object[] param);
+    protected abstract void begin(Class<?> cls, Method method, Object[] param);
 
     /**
      * 错误处理
      */
-    public abstract void error(Class<?> cls, Method method, Object[] param, Throwable throwable);
+    protected abstract void error(Class<?> cls, Method method, Object[] param, Throwable throwable);
 
     /**
      * 后置增强
      */
-    public abstract void after(Class<?> cls, Method method, Object[] param, Object result);
+    protected abstract void after(Class<?> cls, Method method, Object[] param, Object result);
 
     /**
      * finally 执行的代码块
      */
-    public abstract void end();
+    protected abstract void end();
 
 }

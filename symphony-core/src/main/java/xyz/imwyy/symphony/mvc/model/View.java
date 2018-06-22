@@ -1,4 +1,4 @@
-package xyz.imwyy.symphony.mvc.web;
+package xyz.imwyy.symphony.mvc.model;
 
 import java.util.HashMap;
 import java.util.Map;

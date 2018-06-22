@@ -3,7 +3,7 @@ package xyz.imwyy.controller;
 
 import org.junit.Test;
 import xyz.imwyy.symphony.mvc.annotation.RequestType;
-import xyz.imwyy.symphony.mvc.web.Request;
+import xyz.imwyy.symphony.mvc.model.Request;
 
 
 public class HelloControllerTest {

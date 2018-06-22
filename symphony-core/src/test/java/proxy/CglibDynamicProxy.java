@@ -11,10 +11,6 @@ import java.lang.reflect.Method;
  */
 public class CglibDynamicProxy implements MethodInterceptor {
 
-    static {
-        System.out.println("static block");
-    }
-
     public static void method() {
         System.out.println("Static method");
     }

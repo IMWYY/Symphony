@@ -28,14 +28,13 @@ public class Client {
 
         Field[] beanFields = dynamicProxy.getClass().getDeclaredFields();
         for (Field field: beanFields) {
-            System.out.println(field.getName() + " " + field.getType());
+            System.out.println(field.getName() + " -- " + field.getType());
         }
     }
 
     @Test
     public void test() {
-        CglibDynamicProxy.method();
-
+//        CglibDynamicProxy.method();
     }
 
 

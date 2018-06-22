@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
  * 事务控制的代理类
  * create by stephen on 2018/6/5
  */
-public class TransactionProxy implements Proxy{
+public class TransactionProxy implements Proxy {
 
     private static final ThreadLocal<Boolean> TRANSACTION_FLAG = ThreadLocal.withInitial(() -> false);
 
@@ -18,7 +18,7 @@ public class TransactionProxy implements Proxy{
      * 如果方法被TransactionalMethod修饰才会触发代理
      */
     @Override
-    public Object doProxy(ProxyChain proxyChain) {
+    public Object doProxy(ProxyChain proxyChain) throws Throwable {
         Object result = null;
         boolean flag = TRANSACTION_FLAG.get();
         Method method = proxyChain.getMethod();
@@ -30,7 +30,7 @@ public class TransactionProxy implements Proxy{
                 DbUtil.commitTransaction();
             } catch (Throwable throwable) {
                 DbUtil.rollBackTransaction();
-                throwable.printStackTrace();
+                throw throwable;
             } finally {
                 TRANSACTION_FLAG.remove();
             }

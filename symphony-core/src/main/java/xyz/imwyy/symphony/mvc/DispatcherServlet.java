@@ -1,11 +1,15 @@
-package xyz.imwyy.symphony.mvc.web;
+package xyz.imwyy.symphony.mvc;
 
-import xyz.imwyy.symphony.SymphonyContext;
+import xyz.imwyy.symphony.context.AnnotationDrivenSymphonyContext;
+import xyz.imwyy.symphony.context.ClassPathXmlSymphonyContext;
+import xyz.imwyy.symphony.context.SymphonyContext;
 import xyz.imwyy.symphony.mvc.annotation.RequestType;
 import xyz.imwyy.symphony.mvc.handler.Handler;
 import xyz.imwyy.symphony.bean.factory.BeanFFactory;
 import xyz.imwyy.symphony.ConfigContext;
-import xyz.imwyy.symphony.mvc.MvcContext;
+import xyz.imwyy.symphony.mvc.model.Data;
+import xyz.imwyy.symphony.mvc.model.Param;
+import xyz.imwyy.symphony.mvc.model.View;
 import xyz.imwyy.symphony.util.EncodeUtil;
 import xyz.imwyy.symphony.util.JsonUtil;
 import xyz.imwyy.symphony.util.ReflectionUtil;
@@ -30,18 +34,15 @@ import java.util.Map;
 @WebServlet(urlPatterns = "/", loadOnStartup = 0)
 public class DispatcherServlet extends HttpServlet {
 
-//    private static final Logger LOGGER = LoggerFactory.getLogger(DispatcherServlet.class);
+    private static SymphonyContext symphonyContext;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        SymphonyContext.init();
-//        ServletContext servletContext = config.getServletContext();
-//        // 处理jsp的context
-//        ServletRegistration jspServlet = servletContext.getServletRegistration("jsp");
-//        jspServlet.addMapping(ConfigHelper.getAppJspPath() + "*");
-//        // 处理静态资源
-//        ServletRegistration defaultServlet = servletContext.getServletRegistration("default");
-//        defaultServlet.addMapping(ConfigHelper.getAppAssetPath() + "*");
+        try {
+            symphonyContext = new AnnotationDrivenSymphonyContext();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -52,7 +53,7 @@ public class DispatcherServlet extends HttpServlet {
         System.out.println("DispatcherServlet - service - " + requestType + " - " + requestPath);
 
         // 拿到handler
-        Handler handler = MvcContext.getHandler(requestPath, requestType);
+        Handler handler = symphonyContext.getHandler(requestPath, requestType);
 
         if (handler == null) {
             resp.sendError(404);
@@ -62,7 +63,12 @@ public class DispatcherServlet extends HttpServlet {
         // 拿到controller的实例
         Class<?> controllerClass = handler.getControllerClass();
         Method handlerMethod = handler.getActionMethod();
-        Object controllerBean = BeanFFactory.getBean(controllerClass);
+        Object controllerBean = null;
+        try {
+            controllerBean = symphonyContext.getBean(ReflectionUtil.getClassId(controllerClass));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         Object[] paramInstance = createMethodParam(handlerMethod, req, resp);
         // 调用方法
