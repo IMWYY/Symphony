@@ -10,6 +10,7 @@ import java.util.List;
  * 链式代理
  * create by stephen on 2018/6/5
  */
+@Deprecated
 public class ProxyChain {
     private Class<?> targetClass;
     private Object targetObject;

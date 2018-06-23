@@ -12,16 +12,4 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Aspect {
-
-    /**
-     * 代理的目标类
-     */
-    Class<?> targetClass();
-
-    /**
-     * 代理的目标包 包内的所有类都被代理
-     */
-    String targetPackage() default "";
-
-
 }

@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
  * 代理类的抽象类 所有的切面代理必须继承该类
  * create by stephen on 2018/6/5
  */
+@Deprecated
 public abstract class AbstractProxy implements Proxy {
 
     @Override

@@ -12,8 +12,6 @@ public abstract class AbstractBeanDefinitionReader implements BeanDefinitionRead
 
     public AbstractBeanDefinitionReader(BeanFactory beanFactory) {
         this.beanFactory = beanFactory;
-
-        // TODO: 2018/6/22
     }
 
     public BeanFactory getBeanFactory() {

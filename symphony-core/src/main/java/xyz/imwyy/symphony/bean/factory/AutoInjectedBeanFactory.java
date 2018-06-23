@@ -1,6 +1,6 @@
 package xyz.imwyy.symphony.bean.factory;
 
-import xyz.imwyy.symphony.aop.AutoProxyCreator;
+import xyz.imwyy.symphony.aop.proxy.AutoProxyCreator;
 import xyz.imwyy.symphony.aop.BeanInitProcessor;
 import xyz.imwyy.symphony.bean.BeanDefinition;
 import xyz.imwyy.symphony.bean.BeanFactoryAware;
