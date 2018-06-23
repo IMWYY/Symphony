@@ -9,9 +9,13 @@ import xyz.imwyy.symphony.bean.reader.AnnotationDrivenBeanReader;
  */
 public class AnnotationDrivenSymphonyContext extends AbstractSymphonyContext {
 
-    public AnnotationDrivenSymphonyContext() throws Exception {
+    public AnnotationDrivenSymphonyContext(){
         super(new AutoInjectedBeanFactory());
-        refresh();
+        try {
+            refresh();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

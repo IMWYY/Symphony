@@ -2,6 +2,9 @@ package xyz.imwyy.symphony;
 
 import xyz.imwyy.symphony.util.PropsUtil;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Enumeration;
 import java.util.Properties;
 
 /**
@@ -23,7 +26,7 @@ public class ConfigContext {
     public static final String APP_ASSET_PATH = "symphony.asset_path";
 
 
-    private static final Properties CONFIG_PROPS = PropsUtil.loadProps(ConfigContext.CONFIG_FILE);
+    private static Properties CONFIG_PROPS = PropsUtil.loadProps(CONFIG_FILE);
 
     public static String getJdbcDriver() {
         return PropsUtil.getString(CONFIG_PROPS, ConfigContext.JDBC_DRIVER);

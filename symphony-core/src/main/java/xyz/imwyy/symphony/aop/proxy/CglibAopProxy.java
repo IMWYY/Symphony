@@ -59,7 +59,7 @@ public class CglibAopProxy implements AopProxy, MethodInterceptor {
     private Object enhancedMethod(Object obj, Method method, Object[] args, MethodProxy proxy, JoinPoint joinPoint) throws Throwable {
         // 前置增强
         for (Advisor advisor : classFilteredAdvisors) {
-            if (advisor.getCutType().equals(CutType.BEFORE)
+            if ((advisor.getCutType().equals(CutType.BEFORE) || advisor.getCutType().equals(CutType.AROUND))
                     && advisor.getPointCut().matchMethod(method, targetClass)) {
                 advisor.getAdvice().invoke(joinPoint);
             }
@@ -69,7 +69,7 @@ public class CglibAopProxy implements AopProxy, MethodInterceptor {
 
         // 后置增强
         for (Advisor advisor : classFilteredAdvisors) {
-            if (advisor.getCutType().equals(CutType.AFTER)
+            if ((advisor.getCutType().equals(CutType.AFTER) || advisor.getCutType().equals(CutType.AROUND))
                     && advisor.getPointCut().matchMethod(method, targetClass)) {
                 advisor.getAdvice().invoke(joinPoint);
             }

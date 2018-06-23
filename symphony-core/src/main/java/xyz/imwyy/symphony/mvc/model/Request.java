@@ -21,7 +21,7 @@ public class Request {
 
     public Request(String requestMethod, RequestType requestType) {
         this.requestType = requestType;
-        this.requestPath = requestPath;
+        this.requestPath = requestMethod;
     }
 
     public RequestType getRequestMethod() {

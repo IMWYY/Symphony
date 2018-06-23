@@ -41,14 +41,13 @@ public class DispatcherServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        super.init(config);
     }
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestType requestType = RequestType.valueOf(req.getMethod().toUpperCase());
         String requestPath = req.getServletPath();
-
-        System.out.println("DispatcherServlet - service - " + requestType + " - " + requestPath);
 
         // 拿到handler
         Handler handler = symphonyContext.getHandler(requestPath, requestType);
@@ -136,9 +135,11 @@ public class DispatcherServlet extends HttpServlet {
 
         // 如果是以 "/"开头则直接跳转
         if (path.startsWith("/")) {
+            System.out.println("handleViewResult - if");
             resp.sendRedirect(req.getContextPath() + path);
             // 否则将数据转发到jsp页面
         } else {
+            System.out.println("handleViewResult - else");
             Map<String, Object> model = view.getModel();
             for (Map.Entry<String, Object> entry : model.entrySet()) {
                 req.setAttribute(entry.getKey(), entry.getValue());

@@ -4,6 +4,7 @@ package xyz.imwyy.symphony.util;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Properties;
 
 /**
@@ -26,6 +27,7 @@ public class PropsUtil {
             props = new Properties();
             props.load(inputStream);
         } catch (IOException e) {
+            e.printStackTrace();
         } finally {
             if (inputStream != null) {
                 try {
@@ -44,7 +46,7 @@ public class PropsUtil {
 
     public static String getString(Properties properties, String key, String defaultValue) {
         String value = defaultValue;
-        if (properties.contains(key)) {
+        if (properties.containsKey(key)) {
             value = properties.getProperty(key);
         }
         return value;
@@ -56,7 +58,7 @@ public class PropsUtil {
 
     public static int getInt(Properties properties, String key, int defaultValue) {
         int value = defaultValue;
-        if (properties.contains(key)) {
+        if (properties.containsKey(key)) {
             try {
                 value = Integer.valueOf(properties.getProperty(key));
             } catch (NumberFormatException e) {
@@ -72,7 +74,7 @@ public class PropsUtil {
 
     public static boolean getBoolean(Properties properties, String key, boolean defaultValue) {
         boolean value = defaultValue;
-        if (properties.contains(key)) {
+        if (properties.containsKey(key)) {
             try {
                 value = Boolean.valueOf(properties.getProperty(key));
             } catch (NumberFormatException e) {

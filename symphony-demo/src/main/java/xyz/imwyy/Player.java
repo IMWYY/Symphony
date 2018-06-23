@@ -1,9 +1,11 @@
-package xyz.imwyy.model;
+package xyz.imwyy;
+
+import xyz.imwyy.symphony.bean.annotation.Component;
 
 /**
- * 球员的实体类
  * create by stephen on 2018/5/18
  */
+@Component
 public class Player {
 
     private int id;

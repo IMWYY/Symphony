@@ -32,15 +32,4 @@ public class Client {
             System.out.println(field.getName() + " -- " + field.getType());
         }
     }
-
-    @Test
-    public void test() {
-        System.out.println(A.class.getName());
-        Method[] methods = A.class.getDeclaredMethods();
-        System.out.println(methods[0].getParameterTypes().length);
-        System.out.println(methods[1].getParameterTypes().length);
-        System.out.println(methods[2].getParameterTypes().length);
-    }
-
-
 }
